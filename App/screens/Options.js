@@ -4,6 +4,7 @@ import { useTheme } from '@react-navigation/native';
 
 export default () => {
   const { colors } = useTheme();
+
   return (
     <SafeAreaView>
       <View>
