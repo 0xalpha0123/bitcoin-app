@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, ActivityIndicator, TouchableOpacity, RefreshControl, Linking } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, ActivityIndicator, RefreshControl, Linking } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 import Button from '../components/Button';
 
@@ -24,16 +25,26 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: 'center',
-    marginTop: 50,
-    marginBottom: 50,
-    width: 225,
-    height: 225,
-  },
-  visualizer: {
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-    marginRight: 20,
     marginTop: 20,
+    marginBottom: 30,
+    width: 215,
+    height: 215,
+  },
+  iconRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginRight: 42,
+    marginLeft: 20,
+    marginTop: 10,
+  },
+  iconText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginRight: 20,
+    marginLeft: 15,
+    marginTop: 10,
   },
 });
 
@@ -47,7 +58,7 @@ const openUrl = (url) => {
   });
 };
 
-export default () => {
+export default ({ navigation }) => {
   const [indicatorCount, setIndicatorCount] = useState(0);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,7 +119,7 @@ export default () => {
           console.log(error);
           alert('Sorry, something went wrong.');
         });
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(timeout);
@@ -129,9 +140,13 @@ export default () => {
         <ActivityIndicator size='large' style={styles.indicator} />
       ) : (
         <>
-          <View style={styles.visualizer}>
-            <Text style={{ marginRight: 10, alignSelf: 'center', color: colors.text }}>Blockchain Visualizer</Text>
-            <MaterialIcons name='network-check' size={28} color='#f7931a' onPress={() => openUrl('https://txstreet.com/v/btc')} />
+          <View style={styles.iconRow}>
+            <AntDesign name='menu-fold' size={24} color='#006ee6' onPress={() => navigation.toggleDrawer()} />
+            <MaterialIcons name='network-check' size={28} color='#006ee6' onPress={() => openUrl('https://txstreet.com/v/btc')} />
+          </View>
+          <View style={styles.iconText}>
+            <Text style={{ color: '#006ee6' }}>Menu</Text>
+            <Text style={{ color: '#006ee6' }}>Blockchain</Text>
           </View>
           <View>
             <Image source={require('../assets/bitcoin-btc-logo.png')} style={styles.logo} resize='contain' />
