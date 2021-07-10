@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import * as Crypto from 'expo-crypto';
+import { AntDesign } from '@expo/vector-icons';
 
 import Button from '../components/Button';
 
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: 15,
     marginRight: 15,
+    textAlign: 'center',
   },
   container: {
     backgroundColor: 'white',
@@ -32,24 +34,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 15,
   },
+  menuIcon: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginRight: 42,
+    marginLeft: 20,
+    marginTop: 10,
+  },
+  menu: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginRight: 20,
+    marginLeft: 15,
+    marginTop: 10,
+  },
   button: {},
 });
 
-export default () => {
+export default ({ navigation }) => {
   const [input, setInput] = useState('');
   const [hash, setHash] = useState('');
-  // let hash = 'Hash will appear here';
   const { colors } = useTheme();
 
   const sha256 = () => {
     (async () => {
       setHash(await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, input));
+      alert('Hash successful!');
     })();
   };
 
   return (
     <ScrollView>
-      <View>
+      <View style={styles.menuIcon}>
+        <AntDesign name='menu-fold' size={24} color='#006ee6' onPress={() => navigation.toggleDrawer()} />
+      </View>
+      <View style={styles.menu}>
+        <Text style={{ color: '#006ee6' }}>Menu</Text>
+      </View>
+      <View style={{ marginTop: 30 }}>
         <Text style={[styles.header, { color: colors.text }]}>Hash:</Text>
 
         <View style={styles.hashContainer}>
@@ -67,7 +91,6 @@ export default () => {
             text='Hash'
             onPress={() => {
               sha256();
-              alert('Hash successful!');
             }}
           />
         </View>
