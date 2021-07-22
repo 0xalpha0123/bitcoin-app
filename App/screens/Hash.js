@@ -1,62 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
-import { useTheme } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import * as Crypto from 'expo-crypto';
-import { AntDesign } from '@expo/vector-icons';
 
 import Button from '../components/Button';
+import FormInput from '../components/FormInput';
 
 const styles = StyleSheet.create({
-  hash: {
-    margin: 15,
-    color: 'red',
-  },
-  hashContainer: {
-    backgroundColor: 'white',
-    margin: 15,
-    marginTop: 20,
-    borderRadius: 6,
-  },
-  header: {
-    fontWeight: '500',
-    fontSize: 18,
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    textAlign: 'center',
-  },
   container: {
-    backgroundColor: 'white',
-    margin: 15,
-    borderRadius: 6,
-  },
-  input: {
-    backgroundColor: 'white',
-    margin: 15,
-  },
-  menuIcon: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 42,
-    marginLeft: 20,
-    marginTop: 10,
+    marginTop: 50,
   },
-  menu: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginRight: 20,
-    marginLeft: 15,
-    marginTop: 10,
-  },
-  button: {},
 });
 
-export default ({ navigation }) => {
+export default () => {
   const [input, setInput] = useState('');
   const [hash, setHash] = useState('');
-  const { colors } = useTheme();
 
   const sha256 = () => {
     (async () => {
@@ -67,26 +27,12 @@ export default ({ navigation }) => {
 
   return (
     <ScrollView>
-      <View style={styles.menuIcon}>
-        <AntDesign name='menu-fold' size={24} color='#006ee6' onPress={() => navigation.toggleDrawer()} />
-      </View>
-      <View style={styles.menu}>
-        <Text style={{ color: '#006ee6' }}>Menu</Text>
-      </View>
-      <View style={{ marginTop: 30 }}>
-        <Text style={[styles.header, { color: colors.text }]}>Hash:</Text>
+      <View style={styles.container}>
+        <FormInput labelName='SHA-256 Hash' value={hash} autoCapitalize='none' disabled='true' multiline={true} denominator={11} />
 
-        <View style={styles.hashContainer}>
-          <Text style={styles.hash}>{hash}</Text>
-        </View>
+        <FormInput labelName='Enter any value to hash' value={input} autoCapitalize='none' onChangeText={(input) => setInput(input)} />
 
-        <Text style={[styles.header, { color: colors.text }]}>Generate SHA-256 Hash:</Text>
-
-        <View style={styles.container}>
-          <TextInput placeholder='Enter any value to hash' style={styles.input} onChangeText={(input) => setInput(input)} value={input} />
-        </View>
-
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12 }}>
           <Button
             text='Hash'
             onPress={() => {

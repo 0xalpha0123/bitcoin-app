@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, ActivityIndicator, RefreshControl, Linking } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 
 import Button from '../components/Button';
 
 const styles = StyleSheet.create({
-  indicator: {
-    marginTop: 275,
-  },
   container: {
-    marginTop: 0,
+    marginTop: 10,
   },
   row: {
     flexDirection: 'row',
@@ -32,19 +28,17 @@ const styles = StyleSheet.create({
   },
   iconRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 42,
-    marginLeft: 20,
     marginTop: 10,
   },
   iconText: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     marginRight: 20,
-    marginLeft: 15,
-    marginTop: 10,
+    marginTop: 6,
   },
 });
 
@@ -58,7 +52,7 @@ const openUrl = (url) => {
   });
 };
 
-export default ({ navigation }) => {
+export default () => {
   const [indicatorCount, setIndicatorCount] = useState(0);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -137,15 +131,13 @@ export default ({ navigation }) => {
   return (
     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
       {loading && indicatorCount < 1 ? (
-        <ActivityIndicator size='large' style={styles.indicator} />
+        <ActivityIndicator color='transparent' />
       ) : (
         <>
           <View style={styles.iconRow}>
-            <AntDesign name='menu-fold' size={24} color='#006ee6' onPress={() => navigation.toggleDrawer()} />
             <MaterialIcons name='network-check' size={28} color='#006ee6' onPress={() => openUrl('https://txstreet.com/v/btc')} />
           </View>
           <View style={styles.iconText}>
-            <Text style={{ color: '#006ee6' }}>Menu</Text>
             <Text style={{ color: '#006ee6' }}>Blockchain</Text>
           </View>
           <View>
@@ -178,7 +170,7 @@ export default ({ navigation }) => {
               <Text style={[styles.colLeft, { color: colors.text }]}>Hash Rate:</Text>
               <Text style={[styles.colLeft, { color: colors.text }]}>{Number(`${hashRate}` / Math.pow(1000, 3)).toFixed(2) + 'M' + ' TH/s'}</Text>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
               <Button
                 text='OpenNode'
                 onPress={() => openUrl('https://checkout.opennode.com/p/dd107892-4b16-4d67-8240-8c47fb03462a')}

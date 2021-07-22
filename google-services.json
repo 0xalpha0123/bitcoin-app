@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "254148809793",
+    "project_id": "chatkitty-example-7ed83",
+    "storage_bucket": "chatkitty-example-7ed83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254148809793:android:2f4fe34686a6ad0258e2c0",
+        "android_client_info": {
+          "package_name": "chatkitty.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254148809793-n3atvjc046jp8v1cd909lr8ptg83ra4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtEZ8yc0Je7Oa3th-8qqLr0NdWve9arMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254148809793-n3atvjc046jp8v1cd909lr8ptg83ra4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

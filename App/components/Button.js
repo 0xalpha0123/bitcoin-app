@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 
-export const Button = ({ text, onPress, buttonStyle = {} }) => {
+export const Button = ({ text, onPress, buttonStyle, textStyle = {} }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -14,7 +14,7 @@ export const Button = ({ text, onPress, buttonStyle = {} }) => {
         ...buttonStyle,
       }}
     >
-      <Text style={{ color: 'white', fontSize: 24 }}>{text}</Text>
+      <Text style={{ color: 'white', fontSize: 24, ...textStyle }}>{text}</Text>
     </TouchableOpacity>
   );
 };
